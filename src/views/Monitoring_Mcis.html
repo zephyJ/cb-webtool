@@ -188,7 +188,7 @@
 									$(document).ready(function() {
 										//Type selectbox Select Type(Live, History)
 									  $('.monitoring_ip .mt_1 .selectbox').change(function(){
-									    if (this.value == '2') {
+									    if (this.value == 'live') {
 									      $("#hidden_div").hide();
 									    } else {
 									      $("#hidden_div").show();
@@ -405,10 +405,10 @@
 											
 											<div class="view_ip">
 												<ul>
-													<!-- <li class="m4">
-														<label>Servers</label>
-														<input type="text" name="" value="" placeholder="" class="gray" title="" id="sel_vmname" readonly/>
-													</li> -->
+													<li class="m4">
+														<!-- <label>Servers</label>
+														<input type="text" name="" value="" placeholder="" class="gray" title="" id="sel_vmname" readonly/> -->
+													</li>
 													<li class="m5 m5_n">
 														<label>Items</label>
 											      <select class="selectbox white" required id="select_metric">
@@ -427,7 +427,7 @@
 											$(document).ready(function() {
 												//Type selectbox Select Type(Live, History)
 											  $('.view_ipbox .mt_1 .selectbox').change(function(){
-											    if (this.value == '2') {
+											    if (this.value == 'live') {
 											      $("#m_hidden_div").hide();
 											    } else {
 											      $("#m_hidden_div").show();
