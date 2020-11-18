@@ -106,7 +106,7 @@ function mcis_life_cycle(type){
             checked_nothing++;
             console.log("checked")
             var mcis_id = $(this).val()
-            console.log("check td value : ",mid);
+            console.log("check td value : ",mcis_id);
             var nameSpace = NAMESPACE;
             console.log("Start LifeCycle method!!!")
             var url = CommonURL+"/ns/"+nameSpace+"/mcis/"+mcis_id+"?action="+type
@@ -245,6 +245,9 @@ function show_mcis_list(url){
                     terminated_vm_cnt++;
                  }else{
                     vm_badge += "shot bgbox_g"
+                    stop_cnt++;
+                    vm_stop_cnt++;
+                    stop_vm_cnt++;
                  }
 
              }
@@ -252,22 +255,23 @@ function show_mcis_list(url){
              html +='<tr onclick="click_view(\''+mcis[i].id+'\',\''+i+'\');" id="server_info_tr_'+i+'" item="'+mcis[i].id+'|'+i+'">'
              //MCIS name  / MCIS 상태
              if(status == "running"){
-               html +='<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_running.png" class="icon" alt=""/> Running  <span class="ov off"></span></td>'
+               html +='<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_running.png" class="icon" alt=""/> '+sta+'  <span class="ov off"></span></td>'
                 mcis_run_cnt++;
              }else if(status == "include" ){
-                html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> Suspended <span class="ov off"></span></td>'
+                html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
                 mcis_stop_cnt++;
              }else if(status == "suspended"){
-               html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> Suspended <span class="ov off"></span></td>'
+               html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
                 mcis_stop_cnt++;
              }else if(status == "partial"){
-                html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> Suspended <span class="ov off"></span></td>'
+                html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
                  mcis_stop_cnt++;
               }else if(status == "terminate"){
-                html +='<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_terminate.png" class="icon" alt=""/> Terminate <span class="ov off"></span></td>'
+                html +='<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_terminate.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
                 mcis_terminated_cnt;
              }else{
-                
+                html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
+                mcis_stop_cnt++;
              }
            
 
@@ -469,6 +473,9 @@ function show_mcis_list(url){
                     terminated_vm_cnt++;
                  }else{
                     vm_badge += "shot bgbox_g"
+                    stop_cnt++;
+                    vm_stop_cnt++;
+                    stop_vm_cnt++;
                  }
 
              }
@@ -477,22 +484,23 @@ function show_mcis_list(url){
              
              //MCIS name  / MCIS 상태
              if(status == "running"){
-               html +='<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_running.png" class="icon" alt=""/> Running  <span class="ov off"></span></td>'
+               html +='<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_running.png" class="icon" alt=""/> '+sta+'  <span class="ov off"></span></td>'
                 mcis_run_cnt++;
              }else if(status == "include" ){
-                html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> Suspended <span class="ov off"></span></td>'
+                html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
                 mcis_stop_cnt++;
              }else if(status == "partial"){
-               html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> Suspended <span class="ov off"></span></td>'
+               html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
                 mcis_stop_cnt++;
               } else if(status == "suspended"){
-                    html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> Suspended <span class="ov off"></span></td>'
+                    html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
                      mcis_stop_cnt++;
             }else if(status == "terminate"){
-                html +='<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_terminate.png" class="icon" alt=""/> Terminate <span class="ov off"></span></td>'
+                html +='<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_terminate.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
                 mcis_terminated_cnt;
              }else{
-                
+                html += '<td class="overlay hidden td_left" data-th="Status"><img src="/assets/img/contents/icon_stop.png" class="icon" alt=""/> '+sta+' <span class="ov off"></span></td>'
+                mcis_stop_cnt++;
              }
            
 
@@ -615,6 +623,7 @@ function show_mcis_list(url){
     $(".server_status").addClass("view")
     var mcis_arr = test_arr.filter(item => item.id === mcis_id)
     var mcis = mcis_arr[0];
+    $("#mcis_name").val(mcis.name)
     console.log("showmcis2 Data : ",mcis)
     var mcis_badge = "";
     var sta = mcis.status;
@@ -809,7 +818,19 @@ function show_mcis_list(url){
 
     //cspvmdetail
     var vm_detail_keyValue = vm_detail.KeyValueList
-    var architecture = vm_detail_keyValue.filter(item => item.Key === "Architecture")[0].Value
+    var architecture = "";   
+    if(vm_detail_keyValue){
+
+        architecture = vm_detail_keyValue.filter(item => item.Key === "Architecture")
+        console.log("architecture : ",architecture.length)
+        if(architecture.length > 0){
+            architecture = architecture[0].Value
+            console.log("architecture2 : ",architecture)
+            
+        }
+    }
+   
+    
     $("#server_info_archi").val(architecture)
     $("#server_detail_view_archi").val(architecture)
 
@@ -842,7 +863,7 @@ function show_mcis_list(url){
     if(csp == "openstack"){
         csp_icon = '<img src="/assets/img/contents/img_logo9.png" alt=""/>'
     }
-    if(csp == "ali"){
+    if(csp == "alibaba"){
         csp_icon = '<img src="/assets/img/contents/img_logo4.png" alt=""/>'
     }
 
@@ -915,14 +936,16 @@ function show_mcis_list(url){
 
     // install Mon agent
     var installMonAgent = select_vm.monAgentStatus
-    if(installMonAgent == "installed"){
-        console.log("install mon agent : ",installMonAgent)
-        $("#mcis_detail_info_check_monitoring").prop("checked",true)
-        $("#mcis_detail_info_check_monitoring").attr("disabled",true)
-    }else{
-        $("#mcis_detail_info_check_monitoring").prop("checked",false)
-        $("#mcis_detail_info_check_monitoring").attr("disabled",false)
-    }
+    checkDragonFly(mcis_id,vm_id)
+   
+    // if(installMonAgent == "installed"){
+    //     console.log("install mon agent : ",installMonAgent)
+    //     $("#mcis_detail_info_check_monitoring").prop("checked",true)
+    //     $("#mcis_detail_info_check_monitoring").attr("disabled",true)
+    // }else{
+    //     $("#mcis_detail_info_check_monitoring").prop("checked",false)
+    //     $("#mcis_detail_info_check_monitoring").attr("disabled",false)
+    // }
 
     // device info
     var root_device_type = vm_detail.VMBootDisk
@@ -966,6 +989,15 @@ function show_mcis_list(url){
     
     $("#server_detail_view_security_group").empty()
     $("#server_detail_view_security_group").append(append_sg);
+
+    // monitoring
+    // var duration = "5m"
+    // var period_type = "m"
+    // var metric_arr = ["cpu","memory","disk","network"];
+    // var statisticsCriteria = "last";
+	// for(var i in metric_arr){
+	// 	getMetric("canvas_"+i,metric_arr[i],mcis_id,vm_id,metric_arr[i],period_type,statisticsCriteria,duration);
+	// }
  
  }
 // MCIS Control 
@@ -1073,6 +1105,7 @@ function short_desc(str){
 
              var csp = ""
              var new_provider  = provider.filter((item,index, arr)=>(arr.indexOf(item) === index))
+             console.log("new_provider : ",new_provider);
              if(new_provider){
                  if(new_provider.length > 1){
                      csp = new_provider.join(",")
@@ -1093,7 +1126,7 @@ function short_desc(str){
              }else if(status == "terminate"){
                 mcis_badge = '<img src="/assets/img/contents/icon_terminate_db.png" alt=""/>'
              }else{
-                
+                mcis_badge = '<img src="/assets/img/contents/icon_stop_db.png" alt=""/>'
              }
             $("#service_status_icon").empty();
             $("#service_status_icon").append(mcis_badge)
@@ -1297,9 +1330,23 @@ function set_vmVPCInfo(vnetId, subnetId){
         var select_subnet = subnet_arr.filter(item => item.IId.NameId === subnetId)[0]
         var subnet_cidr = select_subnet.IPv4_CIDR
         var sub_kv = select_subnet.KeyValueList
-        var AvailabilityZone = sub_kv.filter(item => item.Key === "AvailabilityZone")[0].Value
-        var AvailableIpAddressCount = sub_kv.filter(item => item.Key === "AvailableIpAddressCount")[0].Value
-        var Status = sub_kv.filter(item => item.Key === "Status")[0].Value
+        if(sub_kv){
+
+            var AvailabilityZone = sub_kv.filter(item => item.Key === "AvailabilityZone")
+            if(AvailabilityZone.length > 0){
+                AvailabilityZone = AvailabilityZone[0].Value
+            }
+            var AvailableIpAddressCount = sub_kv.filter(item => item.Key === "AvailableIpAddressCount")
+            if(AvailableIpAddressCount.length){
+                AvailableIpAddressCount = AvailableIpAddressCount[0].Value
+            }
+    
+            var Status = sub_kv.filter(item => item.Key === "Status")
+            if(Status.length){
+                Status = Status[0].Value
+            }
+        }
+
         subnet_html += '<a href="javascript:void(0);" title="'+select_subnet.IId.NameId+'">'+select_subnet.IId.NameId+'('+select_subnet.IId.SystemId+')</a>'
         +'<div class="bb_info">IPv4_CIDR : '+subnet_cidr+',AvailabilityZone : '+AvailabilityZone+',AvailableIpAddressCount : '+AvailableIpAddressCount+',Status : '+Status+'</div>'
 
